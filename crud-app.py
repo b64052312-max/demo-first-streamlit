@@ -43,7 +43,7 @@ data = worksheet.get_all_records()
 
 if data:
     df = pd.DataFrame(data)
-  # 為了方便對照，我們在畫面上加一個「試算表列數」的欄位
+ # 為了方便對照，我們在畫面上加一個「試算表列數」的欄位
     # 因為第一列是標題，所以資料是從第 2 列開始
     df.insert(0, "試算表列數", range(2, len(data) + 2))
     st.dataframe(df, use_container_width=True)
@@ -94,7 +94,8 @@ if data:
 
         # 抓出該列目前的數值，用來預設填入修改表單
         current_data = data[selected_row_update - 2]
- with st.form("update_data_form"):
+        
+with st.form("update_data_form"):
             new_name = st.text_input("新姓名", value=current_data["姓名"])
             new_qty = st.number_input("新數量", min_value=0, value=int(current_data["數量"]))
             update_submitted = st.form_submit_button("更新資料")
@@ -128,3 +129,5 @@ if data:
                 worksheet.delete_rows(selected_row_del)
             st.success("資料已成功刪除！")
             st.rerun()
+
+       
